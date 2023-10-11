@@ -80,10 +80,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEPLOYED:
+    DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
+else:
+    DATABASES = {
+    "default": {
+        'ENGINE': env.str("LOCAL_DB_ENGINE"),
+        'NAME': env.str("LOCAL_DB_NAME"),
+        'USER': env.str("LOCAL_DB_USER"),
+        'PASSWORD': env.str("LOCAL_DB_PASSWORD"),
+        'HOST': env.str("LOCAL_DB_HOST"),
+        'PORT': env.str("LOCAL_DB_PORT"),
     }
 }
 
