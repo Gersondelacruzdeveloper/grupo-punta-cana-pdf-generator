@@ -1,0 +1,93 @@
+/*-------------------------------------------------------------------- Variables */
+:root {
+    --black: #212529;
+    --shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    --green: #036243;
+    --navy: #04315E;
+    --silver: #F5F5F5;
+    --grey: #DDDDDD;
+    --font: sans-serif, "Montserrat", Georgia;
+    --white:#FFFFFF;
+    --blue:#7BB7E3;
+}
+body {
+    margin: 0;
+    padding: 0;
+    width: calc(100vw - 4px);
+    height: calc(100vh - 4px);
+    background-color: var(--silver);
+    border: 2px solid var(--green);
+}
+
+
+.header{   
+    background-color: var(--green);
+    width:calc(100vw - 4px);
+    min-height: 28px;
+}
+
+#nav{
+    background-color: var(--white);
+    width:calc(100vw - 4px);
+    min-height: 39px;
+}
+
+#footer {
+    position: fixed;
+    background-color: var(--green);
+    width: calc(100vw - 4px);
+    min-height: 30px;
+    bottom: 0;
+}
+
+.title{
+    text-align: center;
+    color:var(--Navy)
+}
+
+/* Styles for the "burger" icon */
+#burger {
+    display: none; /* Initially hidden on larger screens */
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+#nav .button {
+    display: inline-block;
+    width: 88px; 
+    height: 24px; 
+    background-color: var(--grey); 
+    color: var(--navy);
+    text-align: center;
+    text-decoration: none;
+    margin: 10px; 
+    padding: 4px;
+}
+
+#nav .button:hover{
+background-color: var(--blue);
+color:var(--white);
+cursor: pointer;
+}
+
+
+/* Media Query for Mobile */
+@media screen and (max-width: 600px) {
+    #burger {
+        display: block;
+    }
+
+    #nav {
+        display: none;
+        text-align: center;
+    }
+
+    #burger.active + #nav {
+        display: block;
+    }
+
+    #burger.active:before {
+        content: '✕'; /* Change the "burger" to a close icon when active */
+    }
+}
