@@ -18,6 +18,7 @@ class Template(models.Model):
  
 # BoardingPass model
 class GeneratedBoardingPass(models.Model):
+    name = models.CharField(max_length=100, default='')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     template = models.ForeignKey(
         Template,
@@ -42,6 +43,7 @@ GeneratedBoardingPass.default_template = Template.objects.filter(
 
 # invoice model
 class Invoice(models.Model):
+    name = models.CharField(max_length=100, default='')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='invoices_created')
     template = models.ForeignKey(Template,
                                  on_delete=models.CASCADE,
@@ -87,16 +89,7 @@ Invoice.default_template = Template.objects.filter(
 
 # Advertisement model
 class Advertisement(models.Model):
-    LOCATION_CHOICES = [
-        ('LIGHT_BOXES', 'Light Boxes'),
-        ('TENSION_FABRIC', 'Tension Fabric'),
-        ('ADHESIVE_VINYL', 'Adhesive Vinyl'),
-        ('VIDEO_WALL_OR_SCREENS', 'Video Wall or Screens'),
-        ('BACK_COVER', 'Back Cover'),
-        ('LUGGAGE_CART', 'Luggage Cart'),
-        ('INTERACTIVE_POP_UPS', 'Interactive / Pop-Ups'),
-        ('COLUMNS', 'Columns'),
-    ]
+    name = models.CharField(max_length=100, default='')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     template = models.ForeignKey(Template,
                                  on_delete=models.CASCADE,
@@ -109,12 +102,9 @@ class Advertisement(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_posted = models.DateTimeField()
     place = models.CharField(max_length=100)
-    location = models.CharField(
-        max_length=50, choices=LOCATION_CHOICES, unique=True)
     
-
     def __str__(self):
-        return self.get_location_display()
+        return self.name
     
 # Advertisement atribute to search for the right model
 Advertisement.default_template = Template.objects.filter(

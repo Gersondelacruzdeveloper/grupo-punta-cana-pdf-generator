@@ -14,12 +14,10 @@ body {
     margin: 0;
     padding: 0;
     width: calc(100vw - 4px);
-    height: calc(100vh - 4px);
     background-color: var(--silver);
-    border: 2px solid var(--green);
 }
 
-
+/*---------------------------------------------------------------nav header footer */
 .header{   
     background-color: var(--green);
     width:calc(100vw - 4px);
@@ -70,8 +68,6 @@ background-color: var(--blue);
 color:var(--white);
 cursor: pointer;
 }
-
-
 /* Media Query for Mobile */
 @media screen and (max-width: 600px) {
     #burger {
@@ -90,4 +86,89 @@ cursor: pointer;
     #burger.active:before {
         content: '✕'; /* Change the "burger" to a close icon when active */
     }
+}
+
+/*---------------------------------------------------------------pdf list page */
+
+.pdf-container {
+    display: grid;
+    grid-template-columns: auto auto auto; /* Dynamic number of columns with a minimum width of 45% */
+    gap: 20px; /* Gap between grid items */
+    margin: 20px;
+}
+
+.pdf-card {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.pdf-card h2 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.pdf-card p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.pdf-card:hover {
+    transform: scale(1.05);
+    background-color: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+    .pdf-container  {
+        grid-template-columns: auto;
+    }
+}
+
+
+/* for the pdf */
+.container {
+    position: fixed;
+    top: 20%;
+    left: 28%;
+    border-radius: 7px;
+ }
+ #generatePdf {
+    box-sizing: content-box;
+    padding: 30px;
+    border: 1px solid black;
+    font-style: sans-serif;
+    background-color: #f0f0f0;
+ }
+ #pdfButton {
+    background-color: #4caf50;
+    border-radius: 5px;
+    margin-left: 300px;
+    margin-bottom: 5px;
+    color: white;
+ }
+ h2 {
+    text-align: center;
+    color: #24650b;
+ }
+
+/* Custom button class */
+.green-button {
+    background-color: var(--white); /* White background color */
+    color: var(--green); /* Green text color */
+    padding: 10px 20px; /* Add padding to make the button look nice */
+    border: none; /* Remove the button border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for the background color */
+    margin-top: 5px;
+    border:2px solid var(--green);
+}
+
+/* Hover effect */
+.green-button:hover {
+    background-color: var(--green); /* Green background on hover */
+    color: var(--white); /* White text color on hover */
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="title">Received in PDF</h1>
+
+<section>
+    <div class="pdf-container" id="pdf-container">
+        <!-- PDF Cards will be added dynamically using JavaScript -->
+    </div>
+</section>
+<script src="{% static 'js/pdfList.js' %}"></script>
+<script src="{% static 'js/PDFGeneration.js' %}"></script>
+{% endblock content %}

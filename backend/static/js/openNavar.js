@@ -7,5 +7,3 @@ document.addEventListener("DOMContentLoaded", function () {
         burger.classList.toggle("active");
     });
 });
-
-console.log("gerson")
