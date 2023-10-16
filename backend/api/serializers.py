@@ -32,3 +32,8 @@ class TemplateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Template
         fields = '__all__'
+
+class AdminTemplateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Template
+        fields = ['name', 'content', 'type', 'active']

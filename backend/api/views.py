@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status, permissions
 from .models import Invoice,GeneratedBoardingPass,Advertisement,Template
 from .serializers import (InvoiceSerializer, GeneratedBoardingPassSerializer,
-                          AdvertisementSerializer, TemplateSerializer
+                          AdvertisementSerializer, TemplateSerializer, AdminTemplateSerializer
                           )
 from .utils import get_template_content
 from django.views.decorators.csrf import csrf_protect
@@ -78,52 +78,13 @@ def admin_list(request):
 	return Response(combined_data)
 
 # all the models query here together
-@csrf_protect
+# all the models query here together
 @api_view(['POST'])
 def add_template(request):
-	if request.method == "POST":
-		print('data->', request.data)
-	return Response({"message": "Template created successfully."}, status=status.HTTP_201_CREATED )
-
-
-
-
-
-
-
-
-
-
-
-
-# @api_view(["POST"])
-# @permission_classes([permissions.AllowAny])
-# def register_user(request):
-#     if request.method == "POST":
-#         serializer = UserSerializer(data=request.data)
-#         if serializer.is_valid():
-#             user = serializer.save()
-#             refresh = RefreshToken.for_user(user)
-#             response_data = {
-#                 "access": str(refresh.access_token),
-#                 "refresh": str(refresh)
-#             }
-#             return Response(response_data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# @api_view(["POST"])
-# @permission_classes([permissions.AllowAny])
-# def login_user(request):
-#     if request.method == "POST":
-#         email = request.data.get("email")
-#         password = request.data.get("password")
-#         user = authenticate(request, email=email, password=password)
-#         if user is not None:
-#             refresh = RefreshToken.for_user(user)
-#             response_data = {
-#                 "access": str(refresh.access_token),
-#                 "refresh": str(refresh)
-#             }
-#             return Response(response_data, status=status.HTTP_200_OK)
-#         return Response({"message": "Login failed"}, status=status.HTTP_401_UNAUTHORIZED)
+    if request.method == "POST":
+        data = request.data
+        serializer = AdminTemplateSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Template created successfully.", "data": serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
