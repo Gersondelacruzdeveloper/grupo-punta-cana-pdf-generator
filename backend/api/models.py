@@ -109,3 +109,4 @@ class Advertisement(models.Model):
 # Advertisement atribute to search for the right model
 Advertisement.default_template = Template.objects.filter(
         type='Advertisement', active=True).first()
+

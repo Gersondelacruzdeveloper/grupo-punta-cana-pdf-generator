@@ -29,33 +29,37 @@ def apiOverview(request):
 		}
 	return Response(api_urls)
 
-
-# all the models query here together
+# list of pdf
 @api_view(['GET'])
 def pdf_list(request):
-	# invoice
-	invoices = Invoice.objects.all()
-	invoices_serializer = InvoiceSerializer(invoices, many=True)
-	# advertisement
-	advertisement = Advertisement.objects.all()
-	advertisement_serializer = AdvertisementSerializer(advertisement, many=True)
-	# GeneratedBoardingPass
-	boardingPass = GeneratedBoardingPass.objects.all()
-	boarding_pass_serializer = GeneratedBoardingPassSerializer(boardingPass, many=True)
-	# filter advertisement template
-	template_ads= Template.objects.filter(type="Advertisement", active=True)
-	template_boardings= Template.objects.filter(type="BoardingPass", active=True)
-	template_invoiceses= Template.objects.filter(type="Invoice", active=True)
-    # get the template contents
-	template_ads_content = get_template_content(template_ads)
-	template_boarding_content = get_template_content(template_boardings)
-	template_invoice_content = get_template_content(template_invoiceses)
-	combined_data = {
-		"invoices": (invoices_serializer.data, template_invoice_content),
-		"advertisement":(advertisement_serializer.data, template_ads_content),
-		"boarding_pass": (boarding_pass_serializer.data, template_boarding_content),
-	}
-	return Response(combined_data)
+    # Fetch all data in one go for better performance
+    invoices = Invoice.objects.all()
+    advertisement = Advertisement.objects.all()
+    boardingPass = GeneratedBoardingPass.objects.all()
+
+    # Serialize the data
+    invoices_serializer = InvoiceSerializer(invoices, many=True)
+    advertisement_serializer = AdvertisementSerializer(advertisement, many=True)
+    boarding_pass_serializer = GeneratedBoardingPassSerializer(boardingPass, many=True)
+
+    # Filter templates once for each type
+    template_ads = Template.objects.filter(type="Advertisement", active=True)
+    template_boardings = Template.objects.filter(type="BoardingPass", active=True)
+    template_invoices = Template.objects.filter(type="Invoice", active=True)
+
+    # Get template content
+    template_ads_content = get_template_content(template_ads)
+    template_boarding_content = get_template_content(template_boardings)
+    template_invoice_content = get_template_content(template_invoices)
+
+    # Combine the data
+    combined_data = {
+        "invoices": (invoices_serializer.data, template_invoice_content),
+        "advertisement": (advertisement_serializer.data, template_ads_content),
+        "boarding_pass": (boarding_pass_serializer.data, template_boarding_content),
+    }
+    return Response(combined_data)
+
 
 
 # all the models query here together
