@@ -229,3 +229,68 @@ cursor: pointer;
     .dropdown:hover .dropdown-content {
         display: block;
     }
+
+
+    /* ----------------------------------------------------Data tables */
+.data_table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--green);
+    color: var(--white);
+    border: 1px solid var(--grey);
+    padding: 8px;
+}
+
+.data_table {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--white);
+    margin: auto;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.data_table td {
+    font-family: sans-serif;
+    padding: 10px;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table_wrapper tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table_wrapper tr:hover {
+    background-color: #ddd;
+}
+
+.table_wrapper {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+
+}
+
+
+/* ----------------------------------------------------------admin pdf template */
+.fa-trash-alt,
+.fa-square-plus,
+.fa-edit{
+    padding-left: 2px;
+}
+.fa-trash-alt{
+    color:var(--navy)
+}
+.fa-edit{
+    color:var(--green)
+}
+#addBtn{
+margin-left: 50%;
+}
+.fa-square-plus{
+    color:var(--navy)
+}
+

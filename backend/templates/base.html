@@ -42,7 +42,7 @@
             <a class="button" href="{% url 'pdf_list' %}">Pdf</a>
             <a class="button" href="#">Sort by</a>
             <div class="dropdown">
-                <button class="dropbtn">Account <i class="fa-solid fa-caret-down"></i></i></button>
+                <button class="dropbtn">Hi {{request.user}} <i class="fa-solid fa-caret-down"></i></i></button>
                 <div class="dropdown-content">
                     {% if request.user.is_superuser %}
                     <a href="{% url 'administrator' %}">Administrador</a>

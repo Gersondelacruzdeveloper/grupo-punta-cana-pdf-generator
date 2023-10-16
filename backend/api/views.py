@@ -19,6 +19,7 @@ from .utils import get_template_content
 def apiOverview(request):
 	api_urls = {
 		'List':'api/pdf_list/',
+		'Admin List':'admin_list/',
 		'Detail View':'api/template-detail/<str:pk>/',
 		'Create':'api/template-create/',
 		'Update':'api/template-update/<str:pk>/',
@@ -56,6 +57,25 @@ def pdf_list(request):
 	}
 	return Response(combined_data)
 
+
+# all the models query here together
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def admin_list(request):
+	# filter advertisement template
+	template_ads= Template.objects.filter(type="Advertisement")
+	template_boardings= Template.objects.filter(type="BoardingPass")
+	template_invoiceses= Template.objects.filter(type="Invoice")
+	# serialize the data
+	template_ads_serializer = TemplateSerializer(template_ads, many=True)
+	template_boardings_serializer= TemplateSerializer(template_boardings, many=True)
+	template_invoiceses_serializer = TemplateSerializer(template_invoiceses, many=True)
+    # combine data
+	combined_data = {
+		"template_ads": template_ads_serializer.data,
+		"template_boardings":template_boardings_serializer.data,
+		"template_invoiceses": template_invoiceses_serializer.data,
+	}
+	return Response(combined_data)
 
 
 
