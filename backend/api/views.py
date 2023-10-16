@@ -11,6 +11,7 @@ from .serializers import (InvoiceSerializer, GeneratedBoardingPassSerializer,
                           AdvertisementSerializer, TemplateSerializer
                           )
 from .utils import get_template_content
+from django.views.decorators.csrf import csrf_protect
 # from .models import CustomUser
 
 # Create your views here.
@@ -20,8 +21,7 @@ def apiOverview(request):
 	api_urls = {
 		'List':'api/pdf_list/',
 		'Admin List':'admin_list/',
-		'Detail View':'api/template-detail/<str:pk>/',
-		'Create':'api/template-create/',
+		'Create Template':'api/add_template/',
 		'Update':'api/template-update/<str:pk>/',
 		'Delete':'api/template-delete/<str:pk>/',
         'Register User':'api/register_user',
@@ -59,7 +59,7 @@ def pdf_list(request):
 
 
 # all the models query here together
-@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@api_view(['GET'])
 def admin_list(request):
 	# filter advertisement template
 	template_ads= Template.objects.filter(type="Advertisement")
@@ -76,6 +76,14 @@ def admin_list(request):
 		"template_invoiceses": template_invoiceses_serializer.data,
 	}
 	return Response(combined_data)
+
+# all the models query here together
+@csrf_protect
+@api_view(['POST'])
+def add_template(request):
+	if request.method == "POST":
+		print('data->', request.data)
+	return Response({"message": "Template created successfully."}, status=status.HTTP_201_CREATED )
 
 
 

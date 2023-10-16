@@ -5,5 +5,35 @@
 
 <section id="administrator">
 </section>
-<script src="{% static 'js/administrator.js' %}"></script>
+
+
+<!-- Add templates model-->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h2>Add template</h2>
+        <!-- Input elements -->
+        <form  id="addTemplateForm">
+            <label for="templateName">Name:</label>
+            <input type="text" id="templateName" name="templateName" placeholder="Enter template name" required>
+            
+            <label for="templateContent">Content:</label>
+            <textarea id="templateContent" name="templateContent" placeholder="Enter template content" required></textarea>
+            
+            <label for="templateType">Type:</label>
+            <select id="templateType" name="templateType" required>
+                <option value="BoardingPass">BoardingPass</option>
+                <option value="Invoice">Invoice</option>
+                <option value="Advertisement">Advertisement</option>
+            </select>
+            
+            <label for="templateActive">Active:</label>
+            <input type="checkbox" id="templateActive" name="templateActive">
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script type="module" src="{% static 'js/administrator.js' %}"></script>
 {% endblock content %}
